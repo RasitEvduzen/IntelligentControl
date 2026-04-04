@@ -1,5 +1,5 @@
 clc; clear all; close all;
-% Water Wheel Chaos Control  RL Agent 
+% Water Wheel Chaos Control  RL Agent
 % Written By: Rasit
 % Date: 04-Apr-2026
 %% Load trained agent
@@ -20,7 +20,7 @@ T_total    = 80;       % longer simulation
 t_on1      = 20;       % RL first ON
 t_off      = 40;       % RL OFF
 t_on2      = 60;       % RL second ON
-SimStep    = 10;
+SimStep    = 20;
 
 omega_star = 7.787;    % Referance Angular Velocity
 u_max      = 25;
@@ -65,7 +65,6 @@ theta    = linspace(0, 2*pi, 300);
 accumAng = 0;
 
 figure('units','normalized','outerposition',[0 0 1 1],'color','w')
-gif('ChaosControl.gif')
 % wheel animation
 ax1 = subplot(2,3,[1 4]);
 axis(ax1,[-2 2 -2 2]); axis(ax1,'equal','off'); hold(ax1,'on')
@@ -130,7 +129,7 @@ for k = 1:NoD
             set(hS(bk),'XData',[0,bx],'YData',[0,by])
         end
         arrowLen = min(max(w*0.10,-0.8),0.8);
-        set(hArrow,'XData',-0.3,'YData',0,'UData',0,'VData',-arrowLen)
+        set(hArrow,'XData',-0.3,'YData',0,'UData',0,'VData',arrowLen)
         set(hTime,'String',sprintf('t = %.2f s',tn))
 
         rl_on = (tn >= t_on1 && tn < t_off) || (tn >= t_on2);
@@ -141,9 +140,11 @@ for k = 1:NoD
         end
 
         if w > 0.1
-            set(hDir,'String','\leftarrow Counter-CW','Color',[0.75 0.15 0.15])
-        elseif w < -0.1
             set(hDir,'String','Clockwise \rightarrow','Color',[0.1 0.55 0.1])
+
+        elseif w < -0.1
+            set(hDir,'String','\leftarrow Counter-CW','Color',[0.75 0.15 0.15])
+
         else
             set(hDir,'String','Near stall','Color',[0.5 0.5 0.5])
         end
@@ -152,7 +153,6 @@ for k = 1:NoD
         set(hLw,'XData',tspan(1:k),'YData',X(1,1:k))
         set(hLu,'XData',tspan(1:k),'YData',U(1:k))
         drawnow;
-        gif
     end
 end
 
