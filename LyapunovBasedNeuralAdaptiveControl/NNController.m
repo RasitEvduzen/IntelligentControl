@@ -1,5 +1,5 @@
 %% LYAPUNOV-BASED NEURAL ADAPTIVE CONTROL
-%  TRUE SYSTEM — OPEN-LOOP DIFFERENTIAL EQUATION (2nd order nonlinear):
+%  TRUE SYSTEM OPEN-LOOP DIFFERENTIAL EQUATION (2nd order nonlinear):
 %  d^2(y)/dt^2 = -2*sin(y) - 0.8*(dy/dt)*|dy/dt| + w(t) + b*u
 %  STATE-SPACE FORM:
 %  dx1/dt = x2                      (x1 = y     : position)
